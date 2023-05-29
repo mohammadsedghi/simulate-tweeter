@@ -10,7 +10,12 @@ import java.util.List;
 
 public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Serializable>
         implements BaseRepository<E,ID> {
-    private Session session= HibernateUtil.getSessionFactory().openSession();
+    private Session session;
+
+    public BaseRepositoryImpl(Session session) {
+        this.session = session;
+    }
+
     @Override
     public E save(E entity) {
         session.getTransaction().begin();
@@ -38,7 +43,7 @@ public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Se
     @Override
     public List<E> load() {
 
-       return session.createNativeQuery(getQuery()).getResultList();
+       return session.createQuery("from"+getEnitytyClass().getSimpleName(),getEnitytyClass()).getResultList();
     }
-    public abstract String getQuery();
+    public abstract Class<E> getEnitytyClass();
 }

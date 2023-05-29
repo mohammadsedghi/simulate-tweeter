@@ -17,14 +17,14 @@ import java.util.List;
 @Getter
 @ToString
 @NoArgsConstructor
-public class Tweet <ID extends Serializable>  extends BaseEntity<ID> {
+public class Tweet   extends BaseEntity<Long> {
 @Size(max = 280)
    private String message;
    @OneToMany
-    private List<Like<ID>> likeList;
+    private List<Like> likeList;
    @OneToMany
-   private List<Comment<ID>> commentList;
+   private List<Comment> commentList;
    @ManyToOne
-   private Person<ID> person;
+   private Person person;
 
 }

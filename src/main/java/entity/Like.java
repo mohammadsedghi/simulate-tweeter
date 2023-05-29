@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 @NoArgsConstructor
-public class Like <ID extends Serializable> extends BaseEntity<ID> {
+public class Like  extends BaseEntity<Long> {
     @ManyToOne
-    private Tweet<ID> tweet;
+    private Tweet tweet;
 }

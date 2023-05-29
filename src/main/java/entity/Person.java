@@ -14,13 +14,13 @@ import java.util.List;
 @Getter
 @ToString
 @NoArgsConstructor
-public class Person<ID extends Serializable> extends BaseEntity<ID> {
+public class Person extends BaseEntity<Long> {
     private String name;
     private String family;
     private String birthdate;
     private String username;
     private String password;
-    @OneToMany
-    private List<Tweet<ID>> tweetList;
+   // @OneToMany
+  //  private List<Tweet<ID>> tweetList;
 
 }

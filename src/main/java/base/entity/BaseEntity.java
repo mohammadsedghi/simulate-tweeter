@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 @MappedSuperclass
-public class BaseEntity <ID extends Serializable> {
+public class BaseEntity <ID extends Serializable>implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected ID id;

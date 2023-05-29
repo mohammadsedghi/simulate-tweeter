@@ -1,4 +1,8 @@
 package base.service;
 
-public class BaseService {
+import base.entity.BaseEntity;
+
+import java.io.Serializable;
+
+public interface BaseService<E extends BaseEntity<ID>,ID extends Serializable>{
 }

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 @NoArgsConstructor
-public class Comment<ID extends Serializable> extends BaseEntity<ID> {
+public class Comment extends BaseEntity<Long> {
     @OneToMany
-    private Tweet<ID> tweet;
+    private Tweet tweet;
 }

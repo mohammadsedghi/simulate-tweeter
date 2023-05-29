@@ -2,12 +2,19 @@ package repository.Impl;
 
 import base.repository.impl.BaseRepositoryImpl;
 import entity.Like;
+import org.hibernate.Session;
 import repository.LikeRepository;
 
-public class LikeRepositoryImpl extends BaseRepositoryImpl<Like<Long>,Long>
+public class LikeRepositoryImpl extends BaseRepositoryImpl<Like,Long>
         implements LikeRepository {
-    @Override
-    public String getQuery() {
-        return "select * from like";
+    public LikeRepositoryImpl(Session session) {
+        super(session);
     }
+
+    @Override
+    public Class<Like> getEnitytyClass() {
+        return Like.class;
+    }
+
+
 }
