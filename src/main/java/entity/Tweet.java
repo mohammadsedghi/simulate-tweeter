@@ -4,6 +4,7 @@ import base.entity.BaseEntity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class Tweet <ID extends Serializable>  extends BaseEntity<ID> {
-  @Max(value = 280)
+@Size(max = 280)
    private String message;
    @OneToMany
     private List<Like<ID>> likeList;

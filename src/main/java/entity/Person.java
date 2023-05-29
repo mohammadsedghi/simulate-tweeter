@@ -22,4 +22,5 @@ public class Person<ID extends Serializable> extends BaseEntity<ID> {
     private String password;
     @OneToMany
     private List<Tweet<ID>> tweetList;
+
 }
