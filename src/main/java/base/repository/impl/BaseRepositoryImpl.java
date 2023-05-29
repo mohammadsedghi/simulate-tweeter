@@ -38,7 +38,7 @@ public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Se
     @Override
     public List<E> load() {
 
-       return session.createQuery("from "+getEntityClass().getSimpleName(),getEntityClass()).getResultList();
+       return session.createNativeQuery(getQuery()).getResultList();
     }
-    public abstract Class<E> getEntityClass();
+    public abstract String getQuery();
 }

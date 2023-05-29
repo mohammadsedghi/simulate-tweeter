@@ -1,4 +1,7 @@
 package repository;
 
-public interface TweetRepository {
+import base.repository.BaseRepository;
+import entity.Tweet;
+
+public interface TweetRepository extends BaseRepository<Tweet<Long>,Long> {
 }

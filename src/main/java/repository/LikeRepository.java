@@ -1,4 +1,7 @@
 package repository;
 
-public interface LikeRepository {
+import base.repository.BaseRepository;
+import entity.Like;
+
+public interface LikeRepository extends BaseRepository<Like<Long>,Long> {
 }
