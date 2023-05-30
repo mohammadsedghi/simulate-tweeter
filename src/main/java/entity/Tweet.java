@@ -1,14 +1,10 @@
 package entity;
 
 import base.entity.BaseEntity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,14 +13,19 @@ import java.util.List;
 @Getter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Tweet   extends BaseEntity<Long> {
 @Size(max = 280)
    private String message;
-   @OneToMany
+   @OneToMany(mappedBy = "tweet")
     private List<Like> likeList;
-   @OneToMany
+   @OneToMany(mappedBy = "tweet")
    private List<Comment> commentList;
    @ManyToOne
+   @JoinColumn(name = "person_id",nullable = false)
    private Person person;
+
+
 
 }

@@ -1,11 +1,8 @@
 package entity;
 
 import base.entity.BaseEntity;
-import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,7 +10,12 @@ import java.io.Serializable;
 @Getter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "likes")
 public class Like  extends BaseEntity<Long> {
+    private String likes;
     @ManyToOne
+    @JoinColumn(name = "tweet_id",nullable = false)
     private Tweet tweet;
 }
