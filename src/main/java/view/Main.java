@@ -1,4 +1,4 @@
-package service;
+package view;
 
 import base.repository.util.HibernateUtil;
 import entity.Comment;
