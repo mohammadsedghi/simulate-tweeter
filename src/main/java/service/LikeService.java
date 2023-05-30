@@ -1,4 +1,7 @@
 package service;
 
-public interface LikeService {
+import base.service.BaseService;
+import entity.Like;
+
+public interface LikeService extends BaseService<Like,Long> {
 }
