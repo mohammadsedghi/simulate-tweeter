@@ -1,24 +1,30 @@
 package service.Impl;
 
-import base.repository.util.HibernateUtil;
+
 import base.service.Impl.BaseServiceImpl;
 import entity.Person;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import org.hibernate.Session;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
-import repository.Impl.PersonRepositoryImpl;
+
+import repository.PersonRepository;
 import service.PersonService;
 
 import java.util.Set;
 
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
-public class PersonServiceImpl extends BaseServiceImpl<Person, Long> implements PersonService {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    PersonRepositoryImpl personRepository = new PersonRepositoryImpl(session);
+public class PersonServiceImpl extends BaseServiceImpl<Person, PersonRepository, Long> implements PersonService {
+
+    PersonRepository personRepository;
+
+    public PersonServiceImpl(PersonRepository repository) {
+        super(repository);
+        this.personRepository=repository;
+    }
+
 
     @Override
     public void validate(Person entity) {

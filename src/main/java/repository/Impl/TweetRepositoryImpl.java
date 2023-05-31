@@ -7,9 +7,11 @@ import repository.TweetRepository;
 
 public class TweetRepositoryImpl extends BaseRepositoryImpl<Tweet,Long>
         implements TweetRepository {
-
+private final Session session;
     public TweetRepositoryImpl(Session session) {
+
         super(session);
+        this.session=session;
     }
 
     @Override
@@ -18,4 +20,8 @@ public class TweetRepositoryImpl extends BaseRepositoryImpl<Tweet,Long>
     }
 
 
+    @Override
+    public Session getSession() {
+        return session;
+    }
 }

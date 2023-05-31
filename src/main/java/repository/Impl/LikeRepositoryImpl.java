@@ -7,8 +7,11 @@ import repository.LikeRepository;
 
 public class LikeRepositoryImpl extends BaseRepositoryImpl<Like,Long>
         implements LikeRepository {
+    private final Session session;
     public LikeRepositoryImpl(Session session) {
+
         super(session);
+        this.session=session;
     }
 
     @Override
@@ -17,4 +20,8 @@ public class LikeRepositoryImpl extends BaseRepositoryImpl<Like,Long>
     }
 
 
+    @Override
+    public Session getSession() {
+        return session;
+    }
 }

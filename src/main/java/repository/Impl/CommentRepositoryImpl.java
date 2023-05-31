@@ -7,8 +7,11 @@ import repository.CommentRepository;
 
 public class CommentRepositoryImpl extends BaseRepositoryImpl<Comment,Long>
         implements CommentRepository {
+    private final Session session;
     public CommentRepositoryImpl(Session session) {
+
         super(session);
+        this.session=session;
     }
 
     @Override
@@ -17,4 +20,8 @@ public class CommentRepositoryImpl extends BaseRepositoryImpl<Comment,Long>
     }
 
 
+    @Override
+    public Session getSession() {
+        return session;
+    }
 }

@@ -5,4 +5,5 @@ import entity.Person;
 
 public interface PersonService extends BaseService<Person,Long> {
     void signUp(Person person);
+    void validate(Person person);
 }

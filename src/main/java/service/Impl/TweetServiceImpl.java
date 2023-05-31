@@ -1,25 +1,29 @@
 package service.Impl;
 
-import base.repository.util.HibernateUtil;
+
 import base.service.Impl.BaseServiceImpl;
-import entity.Person;
 import entity.Tweet;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import org.hibernate.Session;
+
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
-import repository.Impl.TweetRepositoryImpl;
+import repository.TweetRepository;
 import service.TweetService;
 
 import java.util.Set;
 
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
-public class TweetServiceImpl extends BaseServiceImpl<Tweet, Long> implements TweetService {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    TweetRepositoryImpl tweetRepository = new TweetRepositoryImpl(session);
+public class TweetServiceImpl extends BaseServiceImpl<Tweet, TweetRepository, Long> implements TweetService {
+    TweetRepository tweetRepository ;
+
+    public TweetServiceImpl(TweetRepository repository) {
+        super(repository);
+        this.tweetRepository=repository;
+    }
+
 
     @Override
     public void validate(Tweet entity) {

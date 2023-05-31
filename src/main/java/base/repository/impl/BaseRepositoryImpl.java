@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Serializable>
         implements BaseRepository<E,ID> {
-    private Session session;
+    private final Session session;
 
     public BaseRepositoryImpl(Session session) {
         this.session = session;
@@ -18,25 +18,19 @@ public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Se
 
     @Override
     public E save(E entity) {
-        session.getTransaction().begin();
         session.persist(entity);
-        session.getTransaction().commit();
         return entity;
     }
 
     @Override
     public E update(E entity) {
-        session.getTransaction().begin();
         session.merge(entity);
-        session.getTransaction().commit();
         return entity;
     }
 
     @Override
     public void remove(E entity) {
-        session.getTransaction().begin();
         session.remove(entity);
-        session.getTransaction().commit();
 
     }
 

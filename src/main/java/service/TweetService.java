@@ -6,4 +6,5 @@ import entity.Tweet;
 
 public interface TweetService extends BaseService<Tweet,Long> {
     void signUp(Tweet tweet);
+    void validate(Tweet tweet );
 }
