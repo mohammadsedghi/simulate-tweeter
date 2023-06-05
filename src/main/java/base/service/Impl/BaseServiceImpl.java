@@ -6,7 +6,9 @@ import base.service.BaseService;
 import org.hibernate.Session;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class BaseServiceImpl<E extends BaseEntity<ID>, REPOSITORY extends BaseRepository<E, ID>, ID extends Serializable>
         implements BaseService<E, ID> {
@@ -41,7 +43,12 @@ public class BaseServiceImpl<E extends BaseEntity<ID>, REPOSITORY extends BaseRe
     }
 
     @Override
-    public List<E> load() {
+    public Collection<E> loadAll() {
         return repository.load();
+    }
+
+    @Override
+    public Optional<E> findById(ID id) {
+        return repository.findById(id);
     }
 }

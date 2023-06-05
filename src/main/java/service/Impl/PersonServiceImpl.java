@@ -12,6 +12,7 @@ import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator
 import repository.PersonRepository;
 import service.PersonService;
 
+import java.util.Optional;
 import java.util.Set;
 
 import static org.hibernate.query.sqm.tree.SqmNode.log;
@@ -27,7 +28,7 @@ public class PersonServiceImpl extends BaseServiceImpl<Person, PersonRepository,
 
 
     @Override
-    public void validate(Person entity) {
+    public boolean validate(Person entity) {
         ValidatorFactory factory = Validation.byDefaultProvider()
                 .configure()
                 .messageInterpolator(new ParameterMessageInterpolator())
@@ -40,14 +41,30 @@ public class PersonServiceImpl extends BaseServiceImpl<Person, PersonRepository,
                 log.error(violation.getMessage());
             }
             factory.close();
+            return false;
         } else
+        {
             signUp(entity);
+        return true;
+        }
 
     }
 
     @Override
+    public Optional<Person> findByUserName(String username) {
+        return personRepository.findByUserName(username);
+    }
+
+    @Override
+    public Optional<Person> findByPassword(String password) {
+        return personRepository.findByPassword(password);
+    }
+
+    @Override
     public void signUp(Person person) {
+        personRepository.getSession().getTransaction().begin();
         personRepository.save(person);
+        personRepository.getSession().getTransaction().commit();
     }
 
 

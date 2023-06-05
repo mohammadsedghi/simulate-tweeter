@@ -40,12 +40,7 @@ public class TweetServiceImpl extends BaseServiceImpl<Tweet, TweetRepository, Lo
             }
             factory.close();
         } else
-            signUp(entity);
+            tweetRepository.save(entity);
     }
 
-
-    @Override
-    public void signUp(Tweet tweet) {
-        tweetRepository.save(tweet);
-    }
 }

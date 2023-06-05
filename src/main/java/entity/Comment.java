@@ -15,6 +15,6 @@ import java.io.Serializable;
 public class Comment extends BaseEntity<Long> {
     private String message;
     @ManyToOne
-@JoinColumn(name = "tweet_id",nullable = false)
+@JoinColumn(name = "tweet_id")
     private Tweet tweet;
 }

@@ -14,8 +14,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "likes")
 public class Like  extends BaseEntity<Long> {
-    private String likes;
+    private  String likes;
     @ManyToOne
-    @JoinColumn(name = "tweet_id",nullable = false)
+    @JoinColumn(name = "tweet_id")
     private Tweet tweet;
 }
