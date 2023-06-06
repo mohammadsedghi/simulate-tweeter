@@ -163,127 +163,147 @@ public class Menu {
         commentService.save(comment);
         return comment;
     }
-    public String editTweets(){
+    public String editMessage(){
         System.out.println("please type your message");
       return scanner.next();
 
     }
 
     public void showHome() {
-        System.out.println("=========Home=========");
-        Set<Tweet> tweets = new HashSet<>(tweetService.loadAll());
-        // tweets = tweetService.loadAll();
+        while (true) {
+            System.out.println("=========Home=========");
+            Set<Tweet> tweets = new HashSet<>(tweetService.loadAll());
+            // tweets = tweetService.loadAll();
 
-        if (tweets.size() == 0) {
-            System.out.println("no body write tweets until now, do you want write tweet Y or N ?");
-            if (scanner.next().equals("y")) postTweet();
-            else if (scanner.next().equals("n")) System.exit(0);
-        } else {
-            for (Tweet tweet : tweets) {
-                System.out.println(tweet.getMessage() + "  ===>  " + tweet.getPerson());
-                System.out.println("like number is: " + new HashSet<>(tweet.getLikeList()).size());
-                System.out.println("================================================================================");
-                System.out.println("(1)like----(2)unlike----(3)ShowComment----(4)Like comment---(5)Unlike comment (6)writeComment---(7)Edit comment---(8)remove comment");
-                System.out.println("----------------------------------------------------------------------------------");
-                System.out.println("(9)write tweet---(10)Edit tweet--- (11)remove tweet---(12)search user---(13)show profile---(14)testTweetLength");
-                System.out.println("================================================================================");
-                switch (scanner.nextInt()) {
-                    case 1:
-                        Set<Like> temporaryListLike = new HashSet<>(tweet.getLikeList());
-                        Like like = new Like(user.getUsername(), tweet);
-                        temporaryListLike.add(like);
-                        likeService.save(like);
-                        tweet.setLikeList(temporaryListLike);
-                        tweetService.update(tweet);
-                        System.out.println("like number is: " + temporaryListLike.size());
-                        break;
-                    case 2:
-                        Set<Like> temporaryListUnLike = new HashSet<>(tweet.getLikeList());
-                        for (Like unlike : temporaryListUnLike
-                        ) {
-                            if (unlike.getLikes().equals(user.getUsername())) {
-                                temporaryListUnLike.remove(unlike);
-                                likeService.remove(unlike);
-                                break;
-                            } else System.out.println("user not any liked in past");
-                        }
-                        tweet.setLikeList(temporaryListUnLike);
-                        tweetService.update(tweet);
-                        System.out.println(temporaryListUnLike.size());
-                        break;
+            if (tweets.size() == 0) {
+                System.out.println("no body write tweets until now, do you want write tweet Y or N ?");
+                if (scanner.next().equals("y")) postTweet();
+                else if (scanner.next().equals("n")) System.exit(0);
+            } else {
+                for (Tweet tweet : tweets) {
+                    System.out.println(tweet.getMessage() + "  ===>  " + tweet.getPerson());
+                    System.out.println("like number is: " + new HashSet<>(tweet.getLikeList()).size());
+                    System.out.println("================================================================================");
+                    System.out.println("(1)like----(2)unlike----(3)ShowComment----(4)Like comment---(5)Unlike comment (6)writeComment---(7)Edit comment---(8)remove comment");
+                    System.out.println("----------------------------------------------------------------------------------");
+                    System.out.println("(9)write tweet---(10)Edit tweet--- (11)remove tweet---(12)search user---(13)show profile---(14)testTweetLength---(15)next tweet");
+                    System.out.println("================================================================================");
+                    switch (scanner.nextInt()) {
+                        case 1:
+                            Set<Like> temporaryListLike = new HashSet<>(tweet.getLikeList());
+                            Like like = new Like(user.getUsername(), tweet);
+                            temporaryListLike.add(like);
+                            likeService.save(like);
+                            tweet.setLikeList(temporaryListLike);
+                            tweetService.update(tweet);
+                            System.out.println("like number is: " + temporaryListLike.size());
+                            break;
+                        case 2:
+                            Set<Like> temporaryListUnLike = new HashSet<>(tweet.getLikeList());
+                            for (Like unlike : temporaryListUnLike
+                            ) {
+                                if (unlike.getLikes().equals(user.getUsername())) {
+                                    temporaryListUnLike.remove(unlike);
+                                    likeService.remove(unlike);
+                                    break;
+                                } else System.out.println("user not any liked in past");
+                            }
+                            tweet.setLikeList(temporaryListUnLike);
+                            tweetService.update(tweet);
+                            System.out.println(temporaryListUnLike.size());
+                            break;
 
-                    case 3:
-                        System.out.println("comment: ===>");
-                        if (tweet.getCommentList().size() == 0) System.out.println("no comments found for this tweet");
-                        else tweet.getCommentList().forEach(System.out::println);
-                        break;
+                        case 3:
+                            System.out.println("comment: ===>");
+                            if (tweet.getCommentList().size() == 0)
+                                System.out.println("no comments found for this tweet");
+                            else tweet.getCommentList().forEach(System.out::println);
+                            break;
 
-                    case 4:
+                        case 4:
 
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        Set<Comment> comments = new HashSet<>(tweet.getCommentList());
-                        comments.add(postComment(tweet));
-                        tweet.setCommentList(comments);
-                        tweetService.update(tweet);
-                        break;
-                    case 7:
-                        break;
-                    case 8:
-                        Set<Comment> commentSet = new HashSet<>(tweet.getCommentList());
-                        for (Comment comment : commentSet
-                        ) {
-                            if (comment.getTweet().getPerson().getUsername().equals(user.getUsername())) {
-                                System.out.println(comment);
-                                System.out.println("do you want remove it? yes->y or no->n :");
-                                if (scanner.next() .equals("y")) {
-                                    commentService.remove(comment);
-                                    System.out.println("removed.....");
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            Set<Comment> comments = new HashSet<>(tweet.getCommentList());
+                            comments.add(postComment(tweet));
+                            tweet.setCommentList(comments);
+                            tweetService.update(tweet);
+                            break;
+                        case 7:
+                            Set<Comment> commentSetForEdit = new HashSet<>(tweet.getCommentList());
+                            for (Comment comment : commentSetForEdit
+                            ) {
+                                if (comment.getTweet().getPerson().getUsername().equals(user.getUsername())) {
+                                    System.out.println(comment);
+                                    System.out.println("do you want edit it? yes->y or no->n :");
+                                    if (scanner.next().equals("y")) {
+                                        comment.setMessage(editMessage());
+                                        commentService.update(comment);
+                                        System.out.println("Comment Edited.....");
+                                    }
+                                } else System.out.println("no have comment");
+                            }
+                            break;
+                        case 8:
+                            Set<Comment> commentSet = new HashSet<>(tweet.getCommentList());
+                            for (Comment comment : commentSet
+                            ) {
+                                if (comment.getTweet().getPerson().getUsername().equals(user.getUsername())) {
+                                    System.out.println(comment);
+                                    System.out.println("do you want remove it? yes->y or no->n :");
+                                    if (scanner.next().equals("y")) {
+                                        commentService.remove(comment);
+                                        System.out.println("comment removed.....");
 
+                                    }
                                 }
                             }
-                        }
 
-                        break;
-                    case 9:
-                        postTweet();
-                        break;
-                    case 10:
-                        if (tweet.getPerson().getUsername().equals(user.getUsername())) {
-                           tweet.setMessage(editTweets());
-                            tweetService.update(tweet);
-                            System.out.println("tweet is Edited.....");
-                        }
-                        break;
-                    case 11:
-                        if (tweet.getPerson().getUsername().equals(user.getUsername())) {
-                            tweetService.remove(tweet);
-                            System.out.println("tweet is removed.....");
-                        }
-                        break;
-                    case 12:
-                        System.out.println("please type username");
-                        try {
-                            personService.findByUserName(scanner.next()).ifPresent(System.out::println);
-                        } catch (NoResultException e) {
-                            System.out.println("person with this username not found");
-                        }
-                        break;
-                    case 13:
-                        showProfile();
-                        break;
-                    case 14:
-                        String message = checkTweetLength();
-                        Set<Tweet> tweetSet = new HashSet<>();
-                        Tweet validTweet = new Tweet(message, user);
-                        tweetSet.add(validTweet);
-                        user.setTweetList(tweetSet);
-                        tweetService.validate(validTweet);
-                        personService.update(user);
+                            break;
+                        case 9:
+                            postTweet();
+                            break;
+                        case 10:
+                            if (tweet.getPerson().getUsername().equals(user.getUsername())) {
+                                tweet.setMessage(editMessage());
+                                tweetService.update(tweet);
+                                System.out.println("tweet is Edited.....");
+                            }
+                            break;
+                        case 11:
+                            if (tweet.getPerson().getUsername().equals(user.getUsername())) {
+                                tweetService.remove(tweet);
+                                System.out.println("tweet is removed.....");
+                            }
+                            break;
+                        case 12:
+                            System.out.println("please type username");
+                            try {
+                                personService.findByUserName(scanner.next()).ifPresent(System.out::println);
+                            } catch (NoResultException e) {
+                                System.out.println("person with this username not found");
+                            }
+                            break;
+                        case 13:
+                            showProfile();
+                            break;
+                        case 14:
+                            String message = checkTweetLength();
+                            Set<Tweet> tweetSet = new HashSet<>();
+                            Tweet validTweet = new Tweet(message, user);
+                            tweetSet.add(validTweet);
+                            user.setTweetList(tweetSet);
+                            tweetService.validate(validTweet);
+                            personService.update(user);
+                            break;
+                        case 15:
+                            System.out.println();
+                            break;
+                    }
+
                 }
-
             }
         }
     }
