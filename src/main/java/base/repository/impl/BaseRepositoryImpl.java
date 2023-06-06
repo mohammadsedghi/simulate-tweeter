@@ -26,7 +26,9 @@ public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Se
 
     @Override
     public E update(E entity) {
+        if (findById(entity.getId()).isPresent()){
         session.merge(entity);
+        }
         return entity;
     }
 

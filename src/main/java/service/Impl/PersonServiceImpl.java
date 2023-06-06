@@ -51,7 +51,7 @@ public class PersonServiceImpl extends BaseServiceImpl<Person, PersonRepository,
     }
 
     @Override
-    public Optional<Person> findByUserName(String username) {
+    public   Optional<Person> findByUserName(String username) {
         return personRepository.findByUserName(username);
     }
 

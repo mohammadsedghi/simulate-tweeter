@@ -7,6 +7,6 @@ import entity.Person;
 import java.util.Optional;
 
 public interface PersonRepository extends BaseRepository<Person,Long> {
-    Optional<Person> findByUserName(String username);
+    Optional<Person>  findByUserName(String username);
     Optional<Person> findByPassword(String password);
 }

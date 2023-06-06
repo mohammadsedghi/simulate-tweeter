@@ -27,7 +27,7 @@ public class BaseServiceImpl<E extends BaseEntity<ID>, REPOSITORY extends BaseRe
     }
 
     @Override
-    public E update(E entity) {
+    public E update(E entity ) {
         repository.getSession().getTransaction().begin();
         repository.update(entity);
         repository.getSession().getTransaction().commit();

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -18,10 +20,11 @@ import java.util.Set;
 @Entity
 public class Tweet extends BaseEntity<Long> {
     @Size(max = 280)
+    @Column(length = 280)
     private String message;
-    @OneToMany(mappedBy = "tweet")
+    @OneToMany(mappedBy = "tweet",cascade = CascadeType.REMOVE)
     private Set<Like> likeList;
-    @OneToMany(mappedBy = "tweet")
+    @OneToMany(mappedBy = "tweet",cascade = CascadeType.REMOVE)
     private Set<Comment> commentList;
     @ManyToOne
     @JoinColumn(name = "person_id")

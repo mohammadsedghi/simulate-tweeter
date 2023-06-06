@@ -1,15 +1,14 @@
 package entity;
 
 import base.entity.BaseEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,6 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Person extends BaseEntity<Long> {
     private String name;
     private String family;
@@ -33,8 +33,16 @@ public class Person extends BaseEntity<Long> {
     @Max(value = 110, message = "age must be less than 110 value")
     @Min(value = 18, message = "age must be more than 18")
     private int age;
-    @OneToMany(mappedBy = "person" )
+
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
   private Set<Tweet> tweetList;
+
+    public Person(String name, String family, String birthdate, int age) {
+        this.name = name;
+        this.family = family;
+        this.birthdate = birthdate;
+        this.age = age;
+    }
 
     @Override
     public String toString() {

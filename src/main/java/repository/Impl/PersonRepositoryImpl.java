@@ -3,11 +3,13 @@ package repository.Impl;
 import base.repository.impl.BaseRepositoryImpl;
 import entity.Person;
 import entity.Tweet;
+import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import repository.PersonRepository;
 
 import java.util.List;
@@ -53,7 +55,6 @@ public class PersonRepositoryImpl extends BaseRepositoryImpl<Person, Long>
         CriteriaQuery<Person> cr = cb.createQuery(Person.class);
         Root<Person> root = cr.from(Person.class);
         cr.select(root);
-
         cr.where(cb.equal(root.get("password"),password));
         TypedQuery<Person> query = session.createQuery(cr);
         Person results = query.getSingleResult();
