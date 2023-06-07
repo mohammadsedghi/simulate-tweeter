@@ -221,8 +221,23 @@ public class Menu {
                             break;
 
                         case 4:
-
+                            Set<Comment> temporaryComments = new HashSet<>(tweet.getCommentList());
+                            for (Comment comment:temporaryComments
+                                 ) {
+                                System.out.println(comment);
+                                System.out.println("do you want like it? yes->y no->n");
+                                if (scanner.next().equals("y")) {
+                                    Set<Like> temporaryCommentsLike = new HashSet<>(comment.getLikeList());
+                                    Like likeOfComment = new Like(user.getUsername(), comment);
+                                    temporaryCommentsLike.add(likeOfComment);
+                                    likeService.save(likeOfComment);
+                                    tweet.setLikeList(temporaryCommentsLike);
+                                    commentService.update(comment);
+                                    System.out.println("like number of this comment is: " + temporaryCommentsLike.size());
+                                }else System.out.println();
+                            }
                             break;
+
                         case 5:
                             break;
                         case 6:
