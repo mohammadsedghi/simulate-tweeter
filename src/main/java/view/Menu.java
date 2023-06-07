@@ -23,15 +23,27 @@ import service.PersonService;
 import service.TweetService;
 
 import java.util.*;
+
+/**
+ * in class design for kind of menu and written for request to  person and set value of object then use
+ * other classes in another packages to save,edit,load,loadAll and remove something from database.
+ * after main class this class is very important and have related between main and services .
+ * this project using:
+ * develop Enterprise Edition java language ----jdk 16.0.2..VM....
+ * hibernate to connected database,
+ * mockito and unit test for sign up and validate,
+ * validation for evaluate properties,
+ * maven for using  dependency
+ */
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Menu {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    PersonService personService = new PersonServiceImpl(new PersonRepositoryImpl(session));
-    TweetService tweetService = new TweetServiceImpl(new TweetRepositoryImpl(session));
-    LikeService likeService = new LikeServiceImpl(new LikeRepositoryImpl(session));
-    CommentService commentService = new CommentServiceImpl(new CommentRepositoryImpl(session));
+   final Session session = HibernateUtil.getSessionFactory().openSession();
+    final PersonService personService = new PersonServiceImpl(new PersonRepositoryImpl(session));
+    final TweetService tweetService = new TweetServiceImpl(new TweetRepositoryImpl(session));
+    final  LikeService likeService = new LikeServiceImpl(new LikeRepositoryImpl(session));
+    final CommentService commentService = new CommentServiceImpl(new CommentRepositoryImpl(session));
     Set<Tweet> tweetList = new HashSet<>();
-    Scanner scanner = new Scanner(System.in);
+    final Scanner scanner = new Scanner(System.in);
     public static Person user = new Person();
 
     public static Person getUser() {
@@ -39,7 +51,8 @@ public class Menu {
     }
 
     public void showMenuEntrance() {
-        System.out.println("----------------Twitter--------------");
+        System.out.println("--------------------------Twitter--------------------------");
+        System.out.println();
         System.out.println("-----(1)signUp-----------(2)logIn-----------(3)exit------");
         switch (scanner.nextInt()) {
             case 1:
@@ -81,7 +94,7 @@ public class Menu {
     }
 
     public void logIn() {
-        System.out.println("logIn:------------------------");
+        System.out.println("=========LogIn=========");
         System.out.println("username:---------------------");
         String userName = scanner.next();
         System.out.println("password:---------------------");
@@ -99,7 +112,7 @@ public class Menu {
     }
 
     public void editProfile() {
-        System.out.println("EDIT");
+        System.out.println("=========Edit=========");
         System.out.println("name:----------------------");
         String name = scanner.next();
         System.out.println("family:--------------------");
@@ -122,8 +135,11 @@ public class Menu {
     }
 
     public void showProfile() {
+        System.out.println("=========Profile=========");
+        System.out.println("=====================================================================================================================================");
         System.out.println(user);
-        System.out.println("(1)Edit profile----(2)remove account---(3)log out------");
+        System.out.println("=====================================================================================================================================");
+        System.out.println("(1)Edit profile----(2)remove account----(3)log out------");
         switch (scanner.nextInt()) {
             case 1:
                 editProfile();
