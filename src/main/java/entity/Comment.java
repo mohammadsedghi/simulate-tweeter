@@ -28,6 +28,9 @@ public class Comment extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "tweet_id")
     private Tweet tweet;
+    @ManyToOne
+    @JoinColumn(name ="comment_id" )
+    private Person person;
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private Set<Like> likeList;
 }

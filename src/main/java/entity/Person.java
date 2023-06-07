@@ -2,10 +2,7 @@ package entity;
 
 import base.entity.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -26,6 +23,7 @@ public class Person extends BaseEntity<Long> {
     private String family;
     private String birthdate;
     @Column(unique = true)
+    //@Email
     private String username;
     private String password;
     @Positive(message = "age must be positive value")

@@ -5,14 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "likes")
-public class Like  extends BaseEntity<Long> {
+public class Like extends BaseEntity<Long> {
     public Like(String likes, Tweet tweet) {
         this.likes = likes;
         this.tweet = tweet;
@@ -23,13 +22,15 @@ public class Like  extends BaseEntity<Long> {
         this.comment = comment;
     }
 
-    private  String likes;
+    private String likes;
     @ManyToOne
     @JoinColumn(name = "tweet_id")
     private Tweet tweet;
 
 
-
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
     @ManyToOne
     @JoinColumn(name = "comment_id")
     private Comment comment;
@@ -37,7 +38,7 @@ public class Like  extends BaseEntity<Long> {
     @Override
     public String toString() {
         return "   Like with{" +
-                  likes + '\'' +
+                likes + '\'' +
                 "} ";
     }
 }
