@@ -19,7 +19,7 @@ import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 public class PersonServiceImpl extends BaseServiceImpl<Person, PersonRepository, Long> implements PersonService {
 
-    PersonRepository personRepository;
+   private PersonRepository personRepository;
 
     public PersonServiceImpl(PersonRepository repository) {
         super(repository);

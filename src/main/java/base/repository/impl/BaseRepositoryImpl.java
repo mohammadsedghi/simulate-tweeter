@@ -6,7 +6,7 @@ import org.hibernate.Session;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
+
 import java.util.Optional;
 
 public abstract class BaseRepositoryImpl <E extends BaseEntity<ID>,ID extends Serializable>

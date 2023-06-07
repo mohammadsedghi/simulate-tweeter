@@ -26,8 +26,8 @@ public class Comment extends BaseEntity<Long> {
 
     private String message;
     @ManyToOne
-@JoinColumn(name = "tweet_id")
+    @JoinColumn(name = "tweet_id")
     private Tweet tweet;
-    @OneToMany(mappedBy = "comment",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private Set<Like> likeList;
 }

@@ -6,6 +6,8 @@ import entity.Like;
 import entity.Person;
 import entity.Tweet;
 import jakarta.persistence.NoResultException;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.Session;
 import repository.Impl.CommentRepositoryImpl;
 import repository.Impl.LikeRepositoryImpl;
@@ -21,7 +23,7 @@ import service.PersonService;
 import service.TweetService;
 
 import java.util.*;
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Menu {
     Session session = HibernateUtil.getSessionFactory().openSession();
     PersonService personService = new PersonServiceImpl(new PersonRepositoryImpl(session));
@@ -29,8 +31,6 @@ public class Menu {
     LikeService likeService = new LikeServiceImpl(new LikeRepositoryImpl(session));
     CommentService commentService = new CommentServiceImpl(new CommentRepositoryImpl(session));
     Set<Tweet> tweetList = new HashSet<>();
-    Set<Like> likeList = new HashSet<>();
-    Set<Comment> commentList = new HashSet<>();
     Scanner scanner = new Scanner(System.in);
     public static Person user = new Person();
 

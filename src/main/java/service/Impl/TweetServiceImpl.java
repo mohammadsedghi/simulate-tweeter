@@ -17,7 +17,7 @@ import java.util.Set;
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 public class TweetServiceImpl extends BaseServiceImpl<Tweet, TweetRepository, Long> implements TweetService {
-    TweetRepository tweetRepository ;
+   private TweetRepository tweetRepository ;
 
     public TweetServiceImpl(TweetRepository repository) {
         super(repository);
