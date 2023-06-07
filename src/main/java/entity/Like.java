@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 @Setter
 @Getter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -35,4 +34,10 @@ public class Like  extends BaseEntity<Long> {
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
+    @Override
+    public String toString() {
+        return "   Like with{" +
+                  likes + '\'' +
+                "} ";
+    }
 }

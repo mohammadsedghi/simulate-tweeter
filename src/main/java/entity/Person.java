@@ -37,11 +37,13 @@ public class Person extends BaseEntity<Long> {
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
   private Set<Tweet> tweetList;
 
-    public Person(String name, String family, String birthdate, int age) {
+    public Person(String name, String family, String birthdate,String username,String password, int age) {
         this.name = name;
         this.family = family;
         this.birthdate = birthdate;
         this.age = age;
+        this.username=username;
+        this.password=password;
     }
 
     @Override
